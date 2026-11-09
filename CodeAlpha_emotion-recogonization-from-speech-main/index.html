@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EmotionSense - Speech Emotion Recognition</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="bg-particles">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🧠</span>
+                <h1>EmotionSense</h1>
+            </div>
+            <p class="subtitle">Real-time Speech Emotion Recognition</p>
+        </header>
+
+        <main class="main-card">
+            <section class="mic-section">
+                <div class="mic-container">
+                    <button id="micBtn" class="mic-btn" aria-label="Start recording">
+                        <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="23"/>
+                            <line x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                    </button>
+                    <div class="mic-status" id="micStatus">Tap to Speak</div>
+                    <div class="sound-waves" id="soundWaves">
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="emotions-section">
+                <h2 class="section-title">Emotion Analysis</h2>
+                <div class="emotions-grid" id="emotionsGrid">
+                    <div class="emotion-card" data-emotion="happy">
+                        <div class="emotion-emoji">😊</div>
+                        <div class="emotion-name">Happy</div>
+                        <div class="emotion-bar"><div class="emotion-fill" id="happyFill"></div></div>
+                        <div class="emotion-score" id="happyScore">0%</div>
+                    </div>
+                    <div class="emotion-card" data-emotion="sad">
+                        <div class="emotion-emoji">😢</div>
+                        <div class="emotion-name">Sad</div>
+                        <div class="emotion-bar"><div class="emotion-fill" id="sadFill"></div></div>
+                        <div class="emotion-score" id="sadScore">0%</div>
+                    </div>
+                    <div class="emotion-card" data-emotion="angry">
+                        <div class="emotion-emoji">😡</div>
+                        <div class="emotion-name">Angry</div>
+                        <div class="emotion-bar"><div class="emotion-fill" id="angryFill"></div></div>
+                        <div class="emotion-score" id="angryScore">0%</div>
+                    </div>
+                    <div class="emotion-card" data-emotion="fearful">
+                        <div class="emotion-emoji">😨</div>
+                        <div class="emotion-name">Fearful</div>
+                        <div class="emotion-bar"><div class="emotion-fill" id="fearfulFill"></div></div>
+                        <div class="emotion-score" id="fearfulScore">0%</div>
+                    </div>
+                    <div class="emotion-card" data-emotion="loving">
+                        <div class="emotion-emoji">🥰</div>
+                        <div class="emotion-name">Loving</div>
+                        <div class="emotion-bar"><div class="emotion-fill" id="lovingFill"></div></div>
+                        <div class="emotion-score" id="lovingScore">0%</div>
+                    </div>
+                    <div class="emotion-card" data-emotion="surprised">
+                        <div class="emotion-emoji">😲</div>
+                        <div class="emotion-name">Surprised</div>
+                        <div class="emotion-bar"><div class="emotion-fill" id="surprisedFill"></div></div>
+                        <div class="emotion-score" id="surprisedScore">0%</div>
+                    </div>
+                    <div class="emotion-card" data-emotion="calm">
+                        <div class="emotion-emoji">😌</div>
+                        <div class="emotion-name">Calm</div>
+                        <div class="emotion-bar"><div class="emotion-fill" id="calmFill"></div></div>
+                        <div class="emotion-score" id="calmScore">0%</div>
+                    </div>
+                    <div class="emotion-card" data-emotion="neutral">
+                        <div class="emotion-emoji">😐</div>
+                        <div class="emotion-name">Neutral</div>
+                        <div class="emotion-bar"><div class="emotion-fill" id="neutralFill"></div></div>
+                        <div class="emotion-score" id="neutralScore">0%</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dominant-section">
+                <div class="dominant-label">Dominant Emotion</div>
+                <div class="dominant-display" id="dominantDisplay">
+                    <span class="dominant-emoji" id="dominantEmoji">🎤</span>
+                    <span class="dominant-text" id="dominantText">Say something...</span>
+                </div>
+            </section>
+
+            <section class="transcription-section">
+                <div class="transcription-header">
+                    <h2 class="section-title">📝 Transcription</h2>
+                    <button id="clearBtn" class="clear-btn" aria-label="Clear transcription">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        </svg>
+                        Clear
+                    </button>
+                </div>
+                <div class="transcription-box" id="transcriptionBox">
+                    <span class="placeholder-text">No speech detected yet. Tap the microphone to start...</span>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Powered by Web Speech API · Emotion analysis based on speech content</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
